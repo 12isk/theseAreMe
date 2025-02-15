@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Kiltier';
+    src: url('/fonts/kiltierregular-yqkgo.otf') format('otf');
+}
+
+
+
+.cardPopcontainer{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #F7E7CE;
+    overflow: hidden;
+    //flex-direction: column;
+    //font-family: 'Kiltier';
+}
+
+
+
+.popZone{
+    padding: 50px;
+    font-size: 0.8em;
+    pointer-events: cursor;
+    display: flex;
+    gap: 1.65em;
+}
+.text{
+    font-size: 10em;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 50px;
+    pointer-events: none;
+    //font-family: 'Times New Roman', Times, serif;
+    letter-spacing: -10px;
+    position: relative;
+    z-index: 10;
+    
+}
+.these{
+    font-size: 10em;
+    letter-spacing: -10px;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;   
+}
+
+.image{
+    //z-index: 10;
+    position: absolute;
+    left:0;
+    top:0;
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 2;
+
+}
+.orange{
+    color: #FF4F00;
+}
+
+.around{
+
+    font-family: 'Helvetica';
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: bold;
+
+    .topLeft{
+        position: absolute;
+        left: 2%;
+        top: 2%;
+    }
+    .topRight{
+        position: absolute;
+        right: 2%;
+        top: 2%;
+    }
+    .botLeft{
+        position: absolute;
+        left: 2%;
+        top: 90%;
+    }
+    .botRight{
+        position: absolute;
+        right: 2%;
+        top: 90%;
+    }
+    .muteButton{
+        position: absolute;
+        left: 48%;
+        top: 88%;
+    }
+    
+}
+

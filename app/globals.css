@@ -1,0 +1,83 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@font-face {
+  font-family: 'Kiltier';
+  src: url('/fonts/kiltierregular-yqkgo.otf') format('otf');
+}
+@font-face {
+  font-family: 'Wagon Bold';
+  src: url('/fonts/Wagon-Bold.otf') format('otf');
+}
+@font-face {
+  font-family: 'Wagon';
+  src: url('/fonts/Wagon-ExtraLight.otf') format('otf');
+}
+@font-face {
+  font-family: 'Wagon Italic';
+  src: url('/fonts/Wagon-ExtraLightItalic.otf') format('otf');
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+}
+
+body {
+  color: var(--background);
+  background: var(--foreground);
+  /* font-family: 'Wagon Bold'; */
+  font-family: 'Times New Roman', Times, serif;
+  /* font-family: 'Kiltier', sans-serif; */
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* overflow-y: hidden; */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: space-between;
+}
+
+h1{
+  font-size: 10em;
+  /* font-family: "aabak", sans-serif; */
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 50px;
+  /* position: absolute;
+  top: 20%;
+  left: 30%; */
+}
