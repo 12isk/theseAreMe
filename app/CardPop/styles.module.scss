@@ -22,10 +22,22 @@
 
 .popZone{
     padding: 50px;
-    font-size: 0.8em;
-    pointer-events: cursor;
+    //font-size: 0.8em;
+    pointer-events: auto;
     display: flex;
     gap: 1.65em;
+    @media (max-width: 768px){
+        gap: 1em;
+        padding-top: 100px;
+        padding-bottom: 100px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    @media (max-width: 1024px){
+        //gap: 1.5em;
+        padding-top: 300px;
+        padding-bottom: 300px;
+    }
 }
 .text{
     font-size: 10em;
@@ -38,6 +50,15 @@
     position: relative;
     z-index: 10;
     
+    @media (max-width: 768px){
+        font-size: clamp(2em, 4em, 10em);
+        letter-spacing: -5px;
+
+    }
+    @media (max-width: 1024px){
+        font-size: clamp(2em, 8em, 10em);
+        letter-spacing: -5px;
+    }
 }
 .these{
     font-size: 10em;
@@ -46,7 +67,15 @@
     font-style: italic;
     margin-bottom: 50px;
     position: relative;
-    z-index: 1;   
+    z-index: 1;  
+    @media (max-width: 768px){
+        font-size: clamp(2em, 4em, 10em);
+        letter-spacing: -5px;
+    } 
+    @media (max-width: 1024px){
+        font-size: clamp(2em, 8em, 10em);
+        letter-spacing: -5px;
+    }
 }
 
 .image{
@@ -74,26 +103,46 @@
         position: absolute;
         left: 2%;
         top: 2%;
+        @media (max-width: 768px){
+            top:38%;
+            left:3%;
+        }
     }
     .topRight{
         position: absolute;
         right: 2%;
         top: 2%;
+        @media (max-width: 768px){
+            top:38%;
+            right:3%;
+        }
     }
     .botLeft{
         position: absolute;
         left: 2%;
         top: 90%;
+        @media (max-width: 768px){
+            top:63%;
+            left:5%;
+        }
     }
     .botRight{
         position: absolute;
         right: 2%;
         top: 90%;
+        @media (max-width: 768px){
+            top:63%;
+            right:5%;
+        }
     }
     .muteButton{
         position: absolute;
         left: 48%;
         top: 88%;
+        @media (max-width: 768px){
+            top:80%;
+            left:47%;
+        }
     }
     
 }

@@ -4,23 +4,20 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import styles from "./styles.module.scss";
-import MuteButton  from '../components/Buttons';
+import MuteButton from '../components/Buttons';
 
-// todo try creating a set image component and pass the images as props
 const images = [
     "/images/pop/blur serifa.jpeg",
     "/images/pop/chromatic abb.gif",
     "/images/pop/kazakhstan.webp",
     "/images/pop/me.webp",
     "/images/pop/soloEx.webp",
-
     "/images/pop/pixels.jpeg",
 ];
 const sound = "/audio/Nichel.mp3"
 
 export default function Index() {
     const [isHovering, setIsHovering] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
     const mouse = useRef({ x: 0, y: 0 });
     const imageRef = useRef(null);
     const [currentImage, setCurrentImage] = useState(images[0]);
@@ -39,11 +36,22 @@ export default function Index() {
         }
     };
 
+    // Mouse movement handler
     const handleMouseMovement = (e) => {
         mouse.current = {
             x: e.pageX,
             y: e.pageY
         };
+    };
+
+    // Touch movement handler
+    const handleTouchMovement = (e) => {
+        if (e.touches && e.touches.length > 0) {
+            mouse.current = {
+                x: e.touches[0].pageX,
+                y: e.touches[0].pageY
+            };
+        }
     };
 
     useEffect(() => {
@@ -69,10 +77,12 @@ export default function Index() {
 
         if (typeof window !== 'undefined') {
             window.addEventListener('mousemove', handleMouseMovement);
+            window.addEventListener('touchmove', handleTouchMovement, { passive: true });
             animationFrameRef.current = requestAnimationFrame(updatePosition);
 
             return () => {
                 window.removeEventListener('mousemove', handleMouseMovement);
+                window.removeEventListener('touchmove', handleTouchMovement);
                 if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
             };
         }
@@ -80,7 +90,6 @@ export default function Index() {
 
     const handleHover = () => {
         setIsHovering(true);
-        //requestAnimationFrame(updatePosition);
         intervalRef.current = setInterval(() => {
             setCurrentImage((prevImage) => {
                 const currentIndex = images.indexOf(prevImage);
@@ -95,46 +104,55 @@ export default function Index() {
         clearInterval(intervalRef.current);
     };
 
+    // Toggle function for touch (or click) based devices
+    const handleToggle = () => {
+        if (isHovering) {
+            // Stop and leave the current image visible
+            setIsHovering(false);
+            clearInterval(intervalRef.current);
+        } else {
+            handleHover();
+        }
+    };
+
     return (
         <>
-        <div className={styles.cardPopcontainer}>
-            <div className={styles.around}>
-                <p className={styles.topLeft}>a display of things</p>
-                <p className={styles.topRight}>that make me</p>
-                <p className={styles.botLeft}>discover</p>
-                <p className={styles.botRight}>who i am</p>
-                <div className={styles.muteButton}>
-                    <MuteButton soundFile={sound}/>
+            <div className={styles.cardPopcontainer}>
+                <div className={styles.around}>
+                    <p className={styles.topLeft}>a display of things</p>
+                    <p className={styles.topRight}>that make me</p>
+                    <p className={styles.botLeft}>discover</p>
+                    <p className={styles.botRight}>who i am</p>
+                    <div className={styles.muteButton}>
+                        <MuteButton soundFile={sound} />
+                    </div>
                 </div>
 
+                <motion.div
+                    className={styles.image}
+                    ref={imageRef}
+                    variants={imageVariants}
+                    animate={isHovering ? "visible" : "hidden"}
+                >
+                    <img
+                        src={currentImage}
+                        alt="pop"
+                        width={200}
+                        height={200}
+                    />
+                </motion.div>
+                <div
+                    className={styles.popZone}
+                    onMouseEnter={handleHover}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={handleToggle}
+                >
+                    <span className={styles.these}>these</span>
+                    <span className={styles.text}>
+                        are me<span className={styles.orange}>*</span>
+                    </span>
+                </div>
             </div>
-            
-            
-            <motion.div
-                className={styles.image}
-                ref={imageRef}
-                variants={imageVariants}
-                animate={isHovering ? "visible" : "hidden"}
-            >
-                <img
-                    src={currentImage}
-                    alt="pop"
-                    width={200}
-                    height={200}
-                />
-            </motion.div>
-            <div
-                className={styles.popZone}
-                onMouseEnter={handleHover}
-                onMouseLeave={handleMouseLeave}
-            >
-                <span className={styles.these}>these</span>
-                <span className={styles.text}>are me<span className={styles.orange}>*</span></span>
-            </div>
-        
-        </div>
-        
         </>
-        
     );
 }
