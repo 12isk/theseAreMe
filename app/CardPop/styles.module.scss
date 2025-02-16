@@ -118,34 +118,37 @@
             right:3%;
         }
     }
-    .botLeft{
+    .botLeft {
         position: absolute;
         left: 2%;
         top: 90%;
         @media (max-width: 768px){
-            top:70%;
-            left:5%;
+            top: 70%;
+            left: 5%;
         }
 
-        .tablet{
+        // Use & to reference the parent selector
+        &.tablet {
             @media (min-width:1024px) and (max-width: 1440px){
                 left: 2%;
-                top: 87%;            
+                top: 85%;            
             }
         }
     }
-    .botRight{
+
+    .botRight {
         position: absolute;
         right: 2%;
         top: 90%;
         @media (max-width: 768px){
-            top:70%;
-            right:5%;
+            top: 70%;
+            right: 5%;
         }
-        .tablet{
+        
+        &.tablet {
             @media (min-width:1024px) and (max-width: 1440px){
-                left: 2%;
-                top: 87%;            
+                right: 2%;
+                top: 85%;            
             }
         }
     }
@@ -156,6 +159,12 @@
         @media (max-width: 768px){
             top:80%;
             left:47%;
+        }
+        &.tablet {
+            @media (min-width:1024px) and (max-width: 1440px){
+                left: 48%;
+                top: 85%;            
+            }
         }
     }
     .infoButton{

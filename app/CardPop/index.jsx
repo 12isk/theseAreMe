@@ -8,6 +8,7 @@ import MuteButton from '../components/Buttons';
 import useIsMobile from '@/hooks/useIsMobile';
 import useIsTablet from '@/hooks/useIsTablet';
 import { Info } from 'lucide-react';
+import { s } from 'vite/dist/node/types.d-aGj9QkWt';
 
 
 const images = [
@@ -92,9 +93,11 @@ export default function Index() {
         if (isTablet) {
             const botRight = document.querySelector(`.${styles.botRight}`);
             const botLeft = document.querySelector(`.${styles.botLeft}`);
+            const muteButton = document.querySelector(`.${styles.muteButton}`);
 
-            botRight.classList.add(styles.tablet);
-            botLeft.classList.add(styles.tablet);
+            if (botRight) botRight.classList.add(styles.tablet);
+            if (botLeft) botLeft.classList.add(styles.tablet);
+            if (muteButton) muteButton.classList.add(styles.tablet);
         }
 
         if (typeof window !== 'undefined') {
@@ -110,7 +113,7 @@ export default function Index() {
                 if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
             };
         }
-    }, [isHovering]);
+    }, [isHovering, isTablet]);
 
     const handleHover = () => {
         setIsHovering(true);
