@@ -89,6 +89,14 @@ export default function Index() {
             animationFrameRef.current = requestAnimationFrame(updatePosition);
         };
 
+        if (isTablet) {
+            const botRight = document.querySelector(`.${styles.botRight}`);
+            const botLeft = document.querySelector(`.${styles.botLeft}`);
+
+            botRight.classList.add(styles.tablet);
+            botLeft.classList.add(styles.tablet);
+        }
+
         if (typeof window !== 'undefined') {
             window.addEventListener('mousemove', handleMouseMovement);
             window.addEventListener('touchmove', handleTouchMovement, { passive: true });
