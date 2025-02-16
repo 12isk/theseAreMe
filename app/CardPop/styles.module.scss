@@ -86,6 +86,7 @@
     border-radius: 10px;
     pointer-events: none;
     z-index: 2;
+    will-change: opacity, transform;
 
 }
 .orange{
@@ -142,6 +143,59 @@
         @media (max-width: 768px){
             top:80%;
             left:47%;
+        }
+    }
+    .infoButton{
+        padding: 8px;
+        padding-bottom: 1px;
+        background: transparent; // No background
+        border: none; // Remove default button border
+        cursor: pointer; // Show pointer cursor on hover
+        transition: transform 0.3s ease; // Optional: add a subtle scale effect on hover
+        color: black;
+        position: absolute;
+        left: 52%;
+        top: 80%
+    }
+    .info{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        animation: blink 1.5s linear infinite;
+        font-family: 'Times New Roman', Times, serif;
+        text-transform: lowercase;
+        letter-spacing: -1px;
+        font-style: italic;
+        font-weight: 550;
+        font-size: 1.4em;
+        
+        @media (max-width: 768px){
+            top:86%;
+            left:30%;
+        }
+
+        @media (min-width:768px) and (max-width: 1024px){
+            top:2%;
+            left: 40%;
+        }
+        @media (min-width:1024px) and (max-width: 1440px){
+            top:2%;
+            left: 42%;
+            font-size: 1.7em;
+        }
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 0.85;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 0.85;
         }
     }
     

@@ -19,7 +19,8 @@ export default function MuteButton({soundFile}) {
 
   },[]);
 
-  const toggleAudio = () => {
+  const toggleAudio = (e) => {
+    e.preventDefault();
     if (isMuted) {
       if (audioContext.current.state === 'suspended'){
         audioContext.current.resume().then(() => {

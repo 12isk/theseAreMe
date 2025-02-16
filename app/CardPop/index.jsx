@@ -5,6 +5,10 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import styles from "./styles.module.scss";
 import MuteButton from '../components/Buttons';
+import useIsMobile from '@/hooks/useIsMobile';
+import useIsTablet from '@/hooks/useIsTablet';
+import { Info } from 'lucide-react';
+
 
 const images = [
     "/images/pop/blur serifa.jpeg",
@@ -17,17 +21,22 @@ const images = [
 const sound = "/audio/Nichel.mp3"
 
 export default function Index() {
+
+    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
+    const isMobileDevice = isMobile || isTablet; // separate the hooks calls so the order of the calls doesn't change on renders
+
     const [isHovering, setIsHovering] = useState(false);
     const mouse = useRef({ x: 0, y: 0 });
     const imageRef = useRef(null);
     const [currentImage, setCurrentImage] = useState(images[0]);
     const intervalRef = useRef(null);
     const animationFrameRef = useRef(null);
-
+    const [touchCount, setTouchCount] = useState(0);
     const imageVariants = {
         hidden: {
             opacity: 0,
-            scale: 0.01,
+            scale: 1,
         },
         visible: {
             opacity: 1,
@@ -54,7 +63,12 @@ export default function Index() {
         }
     };
 
+    const handleTouch = () => {
+        setTouchCount((prevCount) => prevCount + 1);
+    }
+
     useEffect(() => {
+        //console.log("touchCount", touchCount);
         if (!imageRef.current) return;
 
         const moveImageX = gsap.quickTo(imageRef.current, "left", {
@@ -78,11 +92,13 @@ export default function Index() {
         if (typeof window !== 'undefined') {
             window.addEventListener('mousemove', handleMouseMovement);
             window.addEventListener('touchmove', handleTouchMovement, { passive: true });
+            window.addEventListener('touchstart', handleTouch, { passive: true });
             animationFrameRef.current = requestAnimationFrame(updatePosition);
 
             return () => {
                 window.removeEventListener('mousemove', handleMouseMovement);
                 window.removeEventListener('touchmove', handleTouchMovement);
+                window.removeEventListener('touchstart', handleTouch);
                 if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
             };
         }
@@ -121,17 +137,28 @@ export default function Index() {
                 <div className={styles.around}>
                     <p className={styles.topLeft}>a display of things</p>
                     <p className={styles.topRight}>that make me</p>
-                    <p className={styles.botLeft}>discover</p>
-                    <p className={styles.botRight}>who i am</p>
+                    <p className={styles.botLeft}>see</p>
+                    <p className={styles.botRight}>myself</p>
                     <div className={styles.muteButton}>
                         <MuteButton soundFile={sound} />
                     </div>
+                    { (isMobileDevice && touchCount < 1) && 
+                    <div className={styles.info}>
+                    <p>Tap once and drag to see who I am</p>
+                    <p>Tap again to stop</p>
+                    </div>
+                    // <button className={styles.infoButton}>
+                    //     <Info size={24} />
+                    // </button>
+                    
+                    }
                 </div>
 
                 <motion.div
                     className={styles.image}
                     ref={imageRef}
                     variants={imageVariants}
+                    initial="hidden"
                     animate={isHovering ? "visible" : "hidden"}
                 >
                     <img
