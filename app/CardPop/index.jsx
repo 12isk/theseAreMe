@@ -8,7 +8,6 @@ import MuteButton from '../components/Buttons';
 import useIsMobile from '@/hooks/useIsMobile';
 import useIsTablet from '@/hooks/useIsTablet';
 import { Info } from 'lucide-react';
-import { s } from 'vite/dist/node/types.d-aGj9QkWt';
 
 
 const images = [
