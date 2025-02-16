@@ -90,14 +90,14 @@ export default function Index() {
             duration: 0.82,
             ease: "power3",
             yPercent: -50,
-            delay: 0.1,
+            //delay: 0.1,
         });
 
         const moveImageY = gsap.quickTo(imageRef.current, "top", {
             duration: 0.82,
             ease: "power3",
             xPercent: -50,
-            delay: 0.1,
+            //delay: 0.1,
         });
 
         const updatePosition = () => {
@@ -187,12 +187,12 @@ export default function Index() {
                     variants={imageVariants}
                     initial="closed"
                     animate={isHovering ? "visible" : "hidden"}
-                    mode="wait"
-                    transition={{
-                        type: "tween",
-                        duration: 0.5,
-                        ease: [0.76, 0, 0.24, 1]
-                    }}
+                    // mode="wait"
+                    // transition={{
+                    //     type: "tween",
+                    //     duration: 0.5,
+                    //     ease: [0.76, 0, 0.24, 1]
+                    // }}
                 >
                     <img
                         src={currentImage}
