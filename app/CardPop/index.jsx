@@ -18,7 +18,7 @@ const images = [
     "/images/pop/soloEx.webp",
     "/images/pop/pixels.jpeg",
 ];
-const sound = "/audio/Nichel.mp3"
+const sound = "/audio/ratherlie.mp3"
 
 export default function Index() {
 
